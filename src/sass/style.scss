@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import 'components/searchBox';
 @import 'components/header';
+@import 'components/highlight';
 
 body {
   width: 100vw;
@@ -33,6 +34,17 @@ body {
     }
   }
 }
-#name{
-    margin-top: -20px;
+#name {
+  margin-top: -20px;
+}
+
+#project_list {
+  height: 100%;
+  border: 2px dotted #31363b;
+  // background-color: red;
+  overflow-y: scroll;
+  list-style: none;
+  > p {
+    background-color: #31363b;
+  }
 }
