@@ -19,20 +19,19 @@ const sass = gulpSass(dartSass),
   reload = browserSync.reload;
 
 const root = "./",
-  cssDest = root + "src/assets/css",
-  cssMinDest = root + "dist/assets/css",
-  sassSrc = root + "src/assets/sass/",
-  js = root + "src/assets/js/";
+  cssDest = root + "src/css",
+  cssMinDest = root + "dist/css",
+  sassSrc = root + "src/sass/",
+  js = root + "src/js/";
 
-const pugSrc = root + "src/assets/pug/",
+const pugSrc = root + "src/pug/",
   pugIncludes = pug + "/includes/";
 
-const phpWatchFiles = root + "**/*.php";
 
 const jsSrc = [js + "app.js"],
-  jsDest = root + "dist/assets/js/";
-const imgSrc = root + "src/assets/img/",
-  imgDest = root + "dist/assets/img/";
+  jsDest = root + "dist/js/";
+const imgSrc = root + "src/img/",
+  imgDest = root + "dist/img/";
 
 
 
@@ -79,7 +78,7 @@ gulp.task("img", async () => {
 //pug
 gulp.task("compilePug", async () => {
   gulp
-    .src(['./src/assets/pug/**/*.pug', '!./src/assets/pug/includes/**/*'])
+    .src(['./src/pug/**/index.pug', '!./src/pug/includes/**/*'])
     .pipe(plumber())
     .pipe(
       pug({
@@ -100,11 +99,11 @@ gulp.task("watch", async () => {
     ui: false
     // proxy:
   });
-  gulp.watch("src/assets/pug/index.pug",gulp.series("compilePug"));
+  gulp.watch("src/pug/index.pug",gulp.series("compilePug"));
   gulp.watch(sassSrc + "**/*.scss", gulp.series("compileSass"));
   gulp.watch(jsSrc, gulp.series("cleanJs"));
   gulp.watch(imgSrc, gulp.series("img"));
-  gulp.watch(["dist/*.html", "dist/assets/css/*.css","dist/assets/js/*.js",phpWatchFiles]).on("change", reload);
+  gulp.watch(["dist/*.html", "dist/css/*.css","dist/js/*.js"]).on("change", reload);
 });
 
 const build = gulp.series(
