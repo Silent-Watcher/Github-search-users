@@ -12,8 +12,11 @@ html(lang="en")
         //- main css file
         link(rel="stylesheet", href="css/style.min.css")
     body 
-        .container-fluid 
+        .container-fluid     
             .container
+                .row  
+                    header.col-4.offset-4.text-white.mt-5  
+                        include includes/_header
                 .row 
                     .col-8.offset-2.text-white.position-relative.mt-5.gx-0.d-flex.justify-content-around.align-items-center
                         section#search
@@ -21,5 +24,5 @@ html(lang="en")
                             button#search_btn
                                 i.fas.fa-search  
                         a#github_icon(href="https://github.com/Silent-Watcher" target="_blank").fs-1.link-light.ms-2
-                            i.fa-brands.fa-github                       
+                            i.fa-brands.fa-github                         
     script(src="js/app.min.js") 
