@@ -1,21 +1,38 @@
 @charset "utf-8";
-@import "components/searchBox";
-@import "components/header";
-
+@import 'components/searchBox';
+@import 'components/header';
 
 body {
-    width: 100vw;
-    height: 100vh;
-    background-image: url("../img/birdEye.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../img/birdEye.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
 }
 
-#github_icon{
-    transition: all .3s ease!important;
-    &:hover{
-        color: #d8d8d8!important;
+#github_icon {
+  transition: all 0.3s ease !important;
+  &:hover {
+    color: #d8d8d8 !important;
+  }
+}
+#view_btn {
+  // transform: translate(-10px , 10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+// transform: translate(0px, -30px);
+
+#main_left {
+  &:hover {
+    #view_btn {
+      transform: translate(0px, -35px) !important;
+      opacity: 1;
     }
+  }
+}
+#name{
+    margin-top: -20px;
 }

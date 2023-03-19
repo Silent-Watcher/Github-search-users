@@ -24,7 +24,7 @@ html(lang="en")
         .container-fluid     
             .container
                 .row  
-                    header.col-4.offset-4.text-white.mt-5  
+                    header.col-4.offset-4.text-white.mt-5.user-select-none
                         include includes/_heading
                 .row 
                     .col-8.offset-2.text-white.position-relative.mt-5.gx-0.d-flex.justify-content-around.align-items-center
@@ -36,6 +36,31 @@ html(lang="en")
                             i.fa-brands.fa-github   
             .container 
                 .row 
-                    main 
+                    main.col-10.offset-1.bg-dark.mt-5
+                        .row 
+                            section.col-6.text-center.text-white.user-select-none#main_left
+                                #avatar_wrapper.text-center.d-flex.justify-content-center.align-items-center
+                                    figure.w-50.bg-primary.rounded-circle.overflow-hidden.mt-4.mb-1
+                                        img(src="img/male_avatar.png", alt="").img-fluid
+                                button#view_btn(type="button").btn.btn-secondary view
+                                h2#name ali.t.nazari 
+                                h5#id silent-watcher
+                                a(href="").link-light.text-decoration-none
+                                    span 
+                                        i.fa-solid.fa-link
+                                    span.ms-2 www.ali.com
+                                #Info.d-flex.justify-content-around.align-items-center.my-3.w-75.mx-auto
+                                    #followers
+                                        p#followers_count.mb-0.text-center 20
+                                        p.mb-0.mt-1 Followers
+                                    #following
+                                        p#following_count.mb-0.text-center 20
+                                        p.mb-0.mt-1 Following
+                                    #publicRepo
+                                        p#publicRepo_count.mb-0.text-center 20
+                                        p.mb-0.mt-1 Public Repos
+                                
+                            section.col-6
+                               
 
     script(src="js/app.min.js") 
