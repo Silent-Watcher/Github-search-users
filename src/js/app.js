@@ -1,35 +1,50 @@
 'use strict';
 
-const $ = document;
-const search = $.querySelector('#search');
-const btn = $.querySelector('#search_btn');
-const input = $.querySelector('#search_input');
-const userName = $.querySelector('#name');
-const userId = $.querySelector('#id');
-const userBlog = $.querySelector('#blog');
-const followers = $.querySelector('#followers_count');
-const followings = $.querySelector('#following_count');
-const publicRepo = $.querySelector('#publicRepo_count');
-const avatar = $.querySelector('#avatar');
-const view_btn = $.querySelector('#view_btn');
+const $ = document,
+  search = $.querySelector('#search'),
+  btn = $.querySelector('#search_btn'),
+  input = $.querySelector('#search_input'),
+  userName = $.querySelector('#name'),
+  userId = $.querySelector('#id'),
+  userBlog = $.querySelector('#blog'),
+  followers = $.querySelector('#followers_count'),
+  followings = $.querySelector('#following_count'),
+  publicRepo = $.querySelector('#publicRepo_count'),
+  avatar = $.querySelector('#avatar'),
+  view_btn = $.querySelector('#view_btn');
+
+window.addEventListener('load', function () {
+    this.fetch('https://api.github.com/users/silent-watcher',{
+      headers : {Authorization: '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'}
+    }).then((res) => {
+      if (res.status === 200) return res.json();
+      else return new Error('error fetching data');
+    })
+    .then((user) => {
+      addUserData(user);
+      fetchUserProjects(user.login);
+    });
+});
 
 // github profile fetch
 input.addEventListener('input', function () {
-  let value = this.value;
-  if (value) {
-    fetch(`https://api.github.com/users/${value}`, {
+  $.querySelector('#project_list').innerHTML = '';
+  fetch(
+    `https://api.github.com/users/${
+      !!this.value ? this.value : 'silent-watcher'
+    }`,
+    {
       headers: { Authorization: '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' },
+    }
+  )
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      else return new Error('error fetching data');
     })
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) return res.json();
-        else return new Error('error fetching data');
-      })
-      .then((user) => {
-        fetchUserData(user);
-        fetchUserProjects(user.login);
-      });
-  }
+    .then((user) => {
+      addUserData(user);
+      fetchUserProjects(user.login);
+    });
 });
 // search box
 btn.addEventListener('click', (e) => {
@@ -48,7 +63,7 @@ const enhance = () => {
 };
 enhance();
 
-function fetchUserData(user) {
+function addUserData(user) {
   userName.innerHTML = user.name ?? 'not found ! 🤔';
   userId.innerHTML = user.login ?? 'not found ! 🤔';
   userBlog.innerHTML = user.blog ?? 'not found !';
@@ -60,33 +75,34 @@ function fetchUserData(user) {
 }
 
 function fetchUserProjects(id) {
-  console.log(`https://api.github.com/users/${id}/repos`);
   fetch(`https://api.github.com/users/${id}/repos`, {
     headers: { Authorization: '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' },
   })
     .then((res) => {
-      console.log(res);
       if (res.status === 200) return res.json();
       else return new Error('error fetching repos');
     })
     .then((repos) => {
-      console.log(repos);
-      let projectsFragment = $.createDocumentFragment();
-      repos.forEach((repo) => {
-        let project = $.createElement('a');
-        project.className =
-          'fs-4 p-1 ps-3 text-light text-decoration-none d-block';
-        project.rel = 'noopener noreferrer';
-        project.target = "_blank";
-        project.innerHTML = repo.name;
-        project.href = repo.html_url;
-        console.log(project)
-        projectsFragment.append(project);
-        console.log(repo.name);
-      });
-      $.querySelector('#project_list').appendChild(projectsFragment);
+      if (repos.length) addUserProjectsElement(repos);
+      else
+        $.querySelector('#project_list').innerHTML =
+          "<p class=' fs-4 p-1 ps-3 text-light text-center'>nothing !<p>";
     });
 }
 
-// github token : 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
-// please keep this token ! 🤗
+function createUserProjectsElement(name, href) {
+  let project = $.createElement('a');
+  project.className = 'fs-4 p-1 ps-3 text-light text-decoration-none d-block';
+  project.target = '_blank';
+  project.innerHTML = name;
+  project.href = href;
+  return project;
+}
+
+function addUserProjectsElement(repos) {
+  let projectsFragment = $.createDocumentFragment();
+  repos.forEach(({ name, html_url }) => {
+    projectsFragment.append(createUserProjectsElement(name, html_url));
+  });
+  $.querySelector('#project_list').appendChild(projectsFragment);
+}
