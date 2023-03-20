@@ -5,6 +5,9 @@
   "description": "nothing to say :)",
   "author": "silentWatcher",
   "license": "MIT",
+  "scripts": {
+    "dev": "gulp"
+  },
   "devDependencies": {
     "browser-sync": "^2.27.7",
     "gulp": "^4.0.2",
