@@ -12,6 +12,7 @@ const $ = document,
   publicRepo = $.querySelector('#publicRepo_count'),
   avatar = $.querySelector('#avatar'),
   view_btn = $.querySelector('#view_btn');
+  repositories = $.querySelector('#project_list');
 
 window.addEventListener('load', function () {
     this.fetch('https://api.github.com/users/silent-watcher',{
@@ -28,7 +29,7 @@ window.addEventListener('load', function () {
 
 // github profile fetch
 input.addEventListener('input', function () {
-  $.querySelector('#project_list').innerHTML = '';
+  repositories.innerHTML = '';
   fetch(
     `https://api.github.com/users/${
       !!this.value ? this.value : 'silent-watcher'
@@ -46,11 +47,13 @@ input.addEventListener('input', function () {
       fetchUserProjects(user.login);
     });
 });
+
 // search box
 btn.addEventListener('click', (e) => {
   search.classList.toggle('active');
   input.focus();
 });
+
 // header
 const enhance = () => {
   document.querySelectorAll('.word').forEach((word) => {
@@ -85,7 +88,7 @@ function fetchUserProjects(id) {
     .then((repos) => {
       if (repos.length) addUserProjectsElement(repos);
       else
-        $.querySelector('#project_list').innerHTML =
+      repositories.innerHTML =
           "<p class=' fs-4 p-1 ps-3 text-light text-center'>nothing !<p>";
     });
 }
@@ -104,5 +107,5 @@ function addUserProjectsElement(repos) {
   repos.forEach(({ name, html_url }) => {
     projectsFragment.append(createUserProjectsElement(name, html_url));
   });
-  $.querySelector('#project_list').appendChild(projectsFragment);
+  repositories.appendChild(projectsFragment);
 }
