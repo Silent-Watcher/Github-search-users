@@ -18,7 +18,7 @@ input.addEventListener('input', function () {
   let value = this.value;
   if (value) {
     fetch(`https://api.github.com/users/${value}`, {
-      headers: { Authorization: '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' },
+      headers: { Authorization: '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' },
     })
       .then((res) => {
         console.log(res);
@@ -52,17 +52,17 @@ function fetchUserData(user) {
   userName.innerHTML = user.name ?? 'not found ! 🤔';
   userId.innerHTML = user.login ?? 'not found ! 🤔';
   userBlog.innerHTML = user.blog ?? 'not found !';
-  followers.innerHTML = user.followers;
-  followings.innerHTML = user.following;
-  publicRepo.innerHTML = user.public_repos;
-  avatar.src = user.avatar_url;
-  view_btn.href = user.html_url;
+  followers.innerHTML = user.followers ?? '..';
+  followings.innerHTML = user.following ?? '..';
+  publicRepo.innerHTML = user.public_repos ?? '..';
+  avatar.src = user.avatar_url ?? 'img/male_avatar.png';
+  view_btn.href = user.html_url ?? '#';
 }
 
 function fetchUserProjects(id) {
   console.log(`https://api.github.com/users/${id}/repos`);
   fetch(`https://api.github.com/users/${id}/repos`, {
-    headers: { Authorization: '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' },
+    headers: { Authorization: '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' },
   })
     .then((res) => {
       console.log(res);
@@ -71,9 +71,20 @@ function fetchUserProjects(id) {
     })
     .then((repos) => {
       console.log(repos);
-      repos.forEach(({ name }) => {
-        console.log(name);
+      let projectsFragment = $.createDocumentFragment();
+      repos.forEach((repo) => {
+        let project = $.createElement('a');
+        project.className =
+          'fs-4 p-1 ps-3 text-light text-decoration-none d-block';
+        project.rel = 'noopener noreferrer';
+        project.target = "_blank";
+        project.innerHTML = repo.name;
+        project.href = repo.html_url;
+        console.log(project)
+        projectsFragment.append(project);
+        console.log(repo.name);
       });
+      $.querySelector('#project_list').appendChild(projectsFragment);
     });
 }
 
