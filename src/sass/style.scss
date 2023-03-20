@@ -20,11 +20,9 @@ body {
   }
 }
 #view_btn {
-  // transform: translate(-10px , 10px);
   opacity: 0;
   transition: all 0.3s ease;
 }
-// transform: translate(0px, -30px);
 
 #main_left {
   &:hover {
@@ -41,10 +39,14 @@ body {
 #project_list {
   height: 100%;
   border: 2px dotted #31363b;
-  // background-color: red;
   overflow-y: scroll;
   list-style: none;
-  > p {
+  > a {
     background-color: #31363b;
+    border: 2px dotted transparent;
+    transition: all .3s ease;
+    &:hover {
+      border: 2px dotted #e4a0a1;
+    }
   }
 }

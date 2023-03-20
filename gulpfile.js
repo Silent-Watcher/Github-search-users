@@ -55,11 +55,6 @@ gulp.task('compileSass', async () => {
 gulp.task('cleanJs', async () => {
   gulp
     .src(jsSrc)
-    .pipe(
-      babel({
-        presets: ['@babel/env'],
-      })
-    )
     .pipe(sourceMaps.init({ loadMaps: true, largeFile: true }))
     .pipe(concat('app.min.js'))
     .pipe(compressJs())
