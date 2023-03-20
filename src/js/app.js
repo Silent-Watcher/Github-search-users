@@ -11,41 +11,15 @@ const $ = document,
   followings = $.querySelector('#following_count'),
   publicRepo = $.querySelector('#publicRepo_count'),
   avatar = $.querySelector('#avatar'),
-  view_btn = $.querySelector('#view_btn');
+  view_btn = $.querySelector('#view_btn'),
   repositories = $.querySelector('#project_list');
 
-window.addEventListener('load', function () {
-    this.fetch('https://api.github.com/users/silent-watcher',{
-      headers : {Authorization: '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'}
-    }).then((res) => {
-      if (res.status === 200) return res.json();
-      else return new Error('error fetching data');
-    })
-    .then((user) => {
-      addUserData(user);
-      fetchUserProjects(user.login);
-    });
-});
+window.addEventListener('load', () => callGithub());
 
 // github profile fetch
 input.addEventListener('input', function () {
   repositories.innerHTML = '';
-  fetch(
-    `https://api.github.com/users/${
-      !!this.value ? this.value : 'silent-watcher'
-    }`,
-    {
-      headers: { Authorization: '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' },
-    }
-  )
-    .then((res) => {
-      if (res.status === 200) return res.json();
-      else return new Error('error fetching data');
-    })
-    .then((user) => {
-      addUserData(user);
-      fetchUserProjects(user.login);
-    });
+  callGithub(this.value);
 });
 
 // search box
@@ -83,12 +57,19 @@ function fetchUserProjects(id) {
   })
     .then((res) => {
       if (res.status === 200) return res.json();
-      else return new Error('error fetching repos');
+      if (res.status === 403) {
+        Swal.fire({
+          title: 'Github 403 ⚠',
+          text: 'too many requests! try again later ',
+          icon: 'error',
+          confirmButtonText: 'fine',
+        });
+      }
     })
     .then((repos) => {
       if (repos.length) addUserProjectsElement(repos);
       else
-      repositories.innerHTML =
+        repositories.innerHTML =
           "<p class=' fs-4 p-1 ps-3 text-light text-center'>nothing !<p>";
     });
 }
@@ -108,4 +89,22 @@ function addUserProjectsElement(repos) {
     projectsFragment.append(createUserProjectsElement(name, html_url));
   });
   repositories.appendChild(projectsFragment);
+}
+
+function callGithub(userName = 'silent-watcher') {
+  fetch(
+    `https://api.github.com/users/${!!userName ? userName : 'silent-watcher'}`,
+    {
+      headers: { Authorization: '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' },
+    }
+  )
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      else return new Error('error fetching data');
+    })
+    .then((user) => {
+      addUserData(user);
+      fetchUserProjects(user.login);
+    })
+    .catch();
 }
