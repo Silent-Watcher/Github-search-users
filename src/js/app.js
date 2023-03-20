@@ -53,7 +53,7 @@ function addUserData(user) {
 
 function fetchUserProjects(id) {
   fetch(`https://api.github.com/users/${id}/repos`, {
-    headers: { Authorization: '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' },
+    headers: { Authorization: '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' },
   })
     .then((res) => {
       if (res.status === 200) return res.json();
@@ -95,7 +95,7 @@ function callGithub(userName = 'silent-watcher') {
   fetch(
     `https://api.github.com/users/${!!userName ? userName : 'silent-watcher'}`,
     {
-      headers: { Authorization: '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' },
+      headers: { Authorization: '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' },
     }
   )
     .then((res) => {
