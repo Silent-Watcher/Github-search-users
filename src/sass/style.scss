@@ -5,12 +5,12 @@
 @import 'components/scrollbar';
 
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-image: url('../img/birdEye.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden;
+  overflow-x: hidden;
   backdrop-filter: blur(15px);
 }
 
@@ -38,7 +38,7 @@ body {
 }
 
 #project_list {
-  height: 400px;
+  height: 390px;
   border: 2px dotted #31363b;
   overflow-y: scroll;
   list-style: none;
