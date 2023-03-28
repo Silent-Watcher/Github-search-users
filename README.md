@@ -11,16 +11,16 @@ This is a web project that allows users to search and find GitHub users using th
 ## Table of Contents
 
 
--   [Features](https://github.com/Silent-Watcher/dictionary#features)
--   [demo](https://github.com/Silent-Watcher/dictionary#demo)
--   [Prerequisites](https://github.com/Silent-Watcher/dictionary#Prerequisites)
--   [Installation](https://github.com/Silent-Watcher/dictionary#Installation)
--   [usage](https://github.com/Silent-Watcher/dictionary#usage)
--   [Deployment](https://github.com/Silent-Watcher/dictionary#deployment)
--   [Screenshots](https://github.com/Silent-Watcher/dictionary#Screenshots)
--   [Acknowledgements](https://github.com/Silent-Watcher/dictionary#Acknowledgements)
--   [Feedback](https://github.com/Silent-Watcher/dictionary#Feedback)
--   [License](https://github.com/Silent-Watcher/dictionary#License)
+-   [Features](https://github.com/Silent-Watcher/Github-search-users#features)
+-   [demo](https://github.com/Silent-Watcher/Github-search-users#demo)
+-   [Prerequisites](https://github.com/Silent-Watcher/Github-search-users#Prerequisites)
+-   [Installation](https://github.com/Silent-Watcher/Github-search-users#Installation)
+-   [usage](https://github.com/Silent-Watcher/Github-search-users#usage)
+-   [Deployment](https://github.com/Silent-Watcher/Github-search-users#deployment)
+-   [Screenshots](https://github.com/Silent-Watcher/Github-search-users#Screenshots)
+-   [Acknowledgements](https://github.com/Silent-Watcher/Github-search-users#Acknowledgements)
+-   [Feedback](https://github.com/Silent-Watcher/Github-search-users#Feedback)
+-   [License](https://github.com/Silent-Watcher/Github-search-users#License)
 ## Features
 
 
