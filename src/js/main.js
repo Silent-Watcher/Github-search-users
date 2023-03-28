@@ -108,3 +108,10 @@ function callGithub(userName = 'silent-watcher') {
     })
     .catch();
 }
+
+// cursor
+new kursor({
+  type: 1,
+  removeDefaultCursor: true,
+  color: '#4169e1'
+})
